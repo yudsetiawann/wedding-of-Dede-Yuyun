@@ -60,13 +60,14 @@ body {
   color: white;
 }
 
+/* CSS untuk navbar */
 .mynavbar {
   background-color: rgba(255, 255, 255, 0.3) !important;
   backdrop-filter: blur(4px);
 }
 
 .mynavbar .offcanvas {
-  height: 100vh;
+  height: 200px;
 }
 
 .mynavbar .navbar-brand,
@@ -84,6 +85,38 @@ body {
 
 .mynavbar .nav-link.active {
   color: #d2b325 !important; /* Warna kuning ketika aktif */
+}
+
+/* CSS untuk tampilan mobile */
+@media (max-width: 767.98px) {
+  .mynavbar .offcanvas {
+    width: 200px; /* Lebar offcanvas */
+    max-width: 200px; /* Maksimum lebar offcanvas */
+    height: 500; /* Tinggi otomatis */
+    border-radius: 0 0 10px 0; /* Membuat sudut melengkung */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Menambahkan shadow */
+  }
+
+  .mynavbar .offcanvas-body {
+    padding: 10px; /* Padding dalam offcanvas */
+  }
+
+  .mynavbar .navbar-nav {
+    width: 100%; /* Lebar penuh untuk menu */
+  }
+
+  .mynavbar .nav-link {
+    padding: 8px 12px; /* Padding untuk setiap link */
+    font-size: 14px; /* Ukuran font untuk link */
+  }
+
+  .mynavbar .offcanvas-header {
+    padding: 10px; /* Padding untuk header offcanvas */
+  }
+
+  .mynavbar .offcanvas-title {
+    font-size: 16px; /* Ukuran font untuk judul offcanvas */
+  }
 }
 
 .home {
