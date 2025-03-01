@@ -3,6 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="og:title" content="Dede & Yuyun - Undangan Digital" />
+    <meta property="og:description" content="Kami mengundang Anda untuk menghadiri pernikahan kami. Klik untuk detail lebih lanjut." />
+    <meta property="og:image" content="https://wedding-of-dede-yuyun.vercel.app/img/cincin.jpg">
+    <meta property="og:url" content="https://wedding-of-dede-yuyun.vercel.app" />
+    <meta property="og:type" content="website" />
+
     <title>Dede & Yuyun Wedding</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
 
@@ -23,9 +30,9 @@
   <body>
     <section id="hero" class="hero w-100 h-100 p-3 mx-auto text-center d-flex justify-content-center align-items-center text-white">
       <main>
-        <h4>Kepada <span>Bapak/Ibu/Saudara/i, </span></h4>
-        <h1>Dede & Yuyun</h1>
-        <p>Akan melangsungkan resepsi pernikahan dalam:</p>
+        <h4 style="font-size: 25px; padding-bottom: 10px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8)">Kepada <span>Bapak/Ibu/Saudara/i, </span></h4>
+        <h1 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8)">Dede & Yuyun</h1>
+        <p style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8)">Akan melangsungkan resepsi pernikahan dalam:</p>
         <div class="simply-countdown"></div>
         <a href="#home" class="btn btn-lg mt-4" onClick="enableScroll()">Lihat Undangan</a>
       </main>
@@ -70,7 +77,7 @@
           <div class="col-lg-6">
             <div class="row">
               <div class="col-8 text-end">
-                <h3>Dede Abdul Wahab</h3>
+                <h3>Dede Abdul Wahab, S.Pd.</h3>
                 <p>
                   Putra keempat dari Bpk. M. Muhammad Taopik Bakry <br />
                   dan <br />
@@ -91,7 +98,7 @@
                 <img src="img/yuyun.jpg" alt="Yuyun" class="img-responsive rounded-circle" />
               </div>
               <div class="col-8">
-                <h3>Yuyun Yuniar</h3>
+                <h3>Yuyun Yuniar, S.Pd.</h3>
                 <p>
                   Putri keempat dari Bpk. Aming Suparmin <br />
                   dan <br />
@@ -549,11 +556,18 @@
       }
     </script>
     <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const nama = urlParams.get("n") || "";
-      const pronoun = urlParams.get("p") || "Bapak/Ibu/Saudara/i";
-      const namaContainer = document.querySelector(".hero h4 span");
-      namaContainer.innerText = `${pronoun} ${nama},`.replace(/ ,$/, ",");
+      document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const nama = decodeURIComponent(urlParams.get("n") || "").replace(/-/g, " ");
+        const pronoun = decodeURIComponent(urlParams.get("p") || "Bapak/Ibu/Saudara/i");
+
+        const namaContainer = document.querySelector(".hero h4 span");
+        if (nama) {
+          namaContainer.innerText = `${pronoun} ${nama}`;
+        } else {
+          namaContainer.innerText = pronoun;
+        }
+      });
 
       document.querySelector("#nama").value = nama;
     </script>
