@@ -6,7 +6,7 @@
 
     <meta property="og:title" content="Dede & Yuyun - Undangan Digital" />
     <meta property="og:description" content="Kami mengundang Anda untuk menghadiri pernikahan kami. Klik untuk detail lebih lanjut." />
-    <meta property="og:image" content="https://wedding-of-dede-yuyun.vercel.app/img/cincin.jpg">
+    <meta property="og:image" content="https://wedding-of-dede-yuyun.vercel.app/img/cincin.jpg" />
     <meta property="og:url" content="https://wedding-of-dede-yuyun.vercel.app" />
     <meta property="og:type" content="website" />
 
@@ -284,13 +284,7 @@
           </div>
         </div>
 
-        <form
-          class="row row-cols-md-auto g-3 align-items-center justify-content-center"
-          method="POST"
-          action="https://script.google.com/macros/s/AKfycbyddFbEJRqwEeA6OmZAuNf0jw_B30ZUOS5qSDwlAKV_nurcW7H6osJx2ZWnIeTmPm_35g/exec"
-          id="my-form"
-          onsubmit="sendToWhatsApp(event)"
-        >
+        <form class="row row-cols-md-auto g-3 align-items-center justify-content-center" id="my-form">
           <div class="col-12">
             <div class="mb-3">
               <label for="nama" class="form-label">Nama</label>
@@ -300,7 +294,7 @@
           <div class="col-12">
             <div class="mb-3">
               <label for="jumlah" class="form-label">Jumlah</label>
-              <input type="number" class="form-control" id="jumlah" name="jumlah" min="1" max="5" length="1" value="1" required />
+              <input type="number" class="form-control" id="jumlah" name="jumlah" min="1" max="5" value="1" required />
             </div>
           </div>
           <div class="col-12">
@@ -314,7 +308,7 @@
             </div>
           </div>
           <div class="col-12" style="margin-top: 35px">
-            <button type="submit" class="btn btn-primary">Kirim</button>
+            <button type="submit" class="btn btn-primary" onclick="sendToWhatsApp(event)">Kirim</button>
           </div>
         </form>
       </div>
@@ -535,23 +529,30 @@
       });
 
       function sendToWhatsApp(event) {
-        event.preventDefault();
+        event.preventDefault(); // Mencegah form terkirim otomatis
 
-        var nama = document.getElementById("nama").value;
-        var jumlah = document.getElementById("jumlah").value;
-        var status = document.getElementById("status").value;
+        // Ambil elemen input yang benar
+        var namaInput = document.getElementById("nama");
+        var jumlahInput = document.getElementById("jumlah");
+        var statusInput = document.getElementById("status");
 
-        if (!nama || !jumlah || !status) {
+        // Pastikan kita mengambil nilai, bukan elemen HTML
+        var nama = namaInput.value.trim();
+        var jumlah = jumlahInput.value.trim();
+        var status = statusInput.value;
+
+        if (!nama || !jumlah || !status || status === "Pilih salah satu") {
           alert("Mohon isi semua data terlebih dahulu.");
           return;
         }
 
         var phoneNumber = "6282218527396";
-        var message = `Halo, saya *${nama}* ingin mengonfirmasi kehadiran: \nJumlah: *${jumlah}* \nStatus: *${status}*`;
+        var message = `Halo, saya *${nama}* ingin mengonfirmasi kehadiran:\nJumlah: *${jumlah}*\nStatus: *${status}*`;
         var whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
         window.open(whatsappURL, "_blank");
 
+        // Kirim form setelah membuka WhatsApp
         document.getElementById("my-form").submit();
       }
     </script>
@@ -567,9 +568,12 @@
         } else {
           namaContainer.innerText = pronoun;
         }
-      });
 
-      document.querySelector("#nama").value = nama;
+        // Set nilai input nama jika ada
+        if (nama) {
+          document.querySelector("#nama").value = nama;
+        }
+      });
     </script>
   </body>
 </html>
