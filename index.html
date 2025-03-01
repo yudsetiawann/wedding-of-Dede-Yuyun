@@ -524,6 +524,7 @@
             body: data,
           }).then(() => {
             alert("Konfirmasi kehadiran berhasil terkirim!");
+            form.reset(); // Reset form setelah berhasil dikirim
           });
         });
       });
@@ -554,6 +555,9 @@
 
         // Kirim form setelah membuka WhatsApp
         document.getElementById("my-form").submit();
+
+        // Reset form setelah dikirim
+        document.getElementById("my-form").reset();
       }
     </script>
     <script>
