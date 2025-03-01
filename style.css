@@ -441,7 +441,11 @@ footer li {
   }
 
   .simply-countdown > .simply-section {
-    padding: 70px;
+    width: 67px !important; /* Lebar bulatan */
+    height: 67px !important; /* Tinggi bulatan */
+    font-size: 1rem !important; /* Ukuran teks dalam bulatan */
+    padding: 20px !important; /* Padding agar konten lebih proporsional */
+    margin: 5px !important; /* Jarak antar bulatan */
   }
 
   .home .heart {
@@ -533,7 +537,6 @@ footer li {
     top: 31px;
   }
 }
-
 
 /* Maps */
 .map-container {
