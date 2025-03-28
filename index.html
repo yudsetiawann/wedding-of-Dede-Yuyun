@@ -32,8 +32,8 @@
       <main>
         <h4 style="font-size: 20px; padding-bottom: 10px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8)">
           Kepada Yth. <br />
-          <span>Bapak/Ibu/Saudara/i,</span> <br />
-          <strong id="nama-tamu" style="display: inline-block; margin-top: 4px; font-size: 25px"></strong>
+          <span id="pronoun-tamu">Bapak/Ibu/Saudara/i</span> <br />
+          <strong id="nama-tamu" style="display: none; margin-top: 4px; font-size: 25px"></strong>
         </h4>
         <h1 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); font-size: 50px">Yuyun & D Wahab</h1>
         <p style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8)">Akan melangsungkan resepsi pernikahan dalam:</p>
@@ -567,17 +567,20 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const urlParams = new URLSearchParams(window.location.search);
-        const nama = decodeURIComponent(urlParams.get("n") || "").replace(/-/g, " ");
-        const pronoun = decodeURIComponent(urlParams.get("p") || "Bapak/Ibu/Saudara/i");
+        const nama = decodeURIComponent(urlParams.get("n") || "")
+          .replace(/-/g, " ")
+          .replace(/%26/g, "&");
 
         const namaContainer = document.getElementById("nama-tamu");
         const pronounContainer = document.getElementById("pronoun-tamu");
 
+        // Set pronoun default
+        pronounContainer.innerText = "Bapak/Ibu/Saudara/i";
+
         if (nama) {
-          pronounContainer.innerText = pronoun;
           namaContainer.innerText = nama;
+          namaContainer.style.display = "block";
         } else {
-          pronounContainer.innerText = pronoun;
           namaContainer.style.display = "none";
         }
 
