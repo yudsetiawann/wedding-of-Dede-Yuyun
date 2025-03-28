@@ -33,7 +33,7 @@
         <h4 style="font-size: 20px; padding-bottom: 10px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8)">
           Kepada Yth. <br />
           <span>Bapak/Ibu/Saudara/i,</span> <br />
-          <strong id="nama-tamu" style="display: inline-block; margin-top: 4px; font-size: 25px;"></strong>
+          <strong id="nama-tamu" style="display: inline-block; margin-top: 4px; font-size: 25px"></strong>
         </h4>
         <h1 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); font-size: 50px">Yuyun & D Wahab</h1>
         <p style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8)">Akan melangsungkan resepsi pernikahan dalam:</p>
@@ -80,24 +80,6 @@
         <div class="row couple">
           <div class="col-lg-6">
             <div class="row">
-              <div class="col-8 text-end">
-                <h3>Dede Abdul Wahab, S.Pd.</h3>
-                <p>
-                  Putra keempat dari Bpk. M. Muhammad Taopik Bakry <br />
-                  dan <br />
-                  Ibu Dadah Hamidah S.Pd.i
-                </p>
-              </div>
-              <div class="col-4">
-                <img src="img/dede.jpg" alt="Dede" class="img-responsive rounded-circle" />
-              </div>
-            </div>
-          </div>
-
-          <span class="heart"><i class="bi bi-heart-fill"></i></span>
-
-          <div class="col-lg-6">
-            <div class="row">
               <div class="col-4">
                 <img src="img/yuyun.jpg" alt="Yuyun" class="img-responsive rounded-circle" />
               </div>
@@ -108,6 +90,24 @@
                   dan <br />
                   Ibu Neti Tresnawati
                 </p>
+              </div>
+            </div>
+          </div>
+
+          <span class="heart"><i class="bi bi-heart-fill"></i></span>
+
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-8 text-end">
+                <h3>Dede Abdul Wahab, S.Pd.</h3>
+                <p>
+                  Putra keempat dari Bpk. M. Muhammad Taopik Bakry <br />
+                  dan <br />
+                  Ibu Dadah Hamidah S.Pd.i
+                </p>
+              </div>
+              <div class="col-4">
+                <img src="img/dede.jpg" alt="Dede" class="img-responsive rounded-circle" />
               </div>
             </div>
           </div>
@@ -570,11 +570,15 @@
         const nama = decodeURIComponent(urlParams.get("n") || "").replace(/-/g, " ");
         const pronoun = decodeURIComponent(urlParams.get("p") || "Bapak/Ibu/Saudara/i");
 
-        const namaContainer = document.querySelector(".hero h4 span");
+        const namaContainer = document.getElementById("nama-tamu");
+        const pronounContainer = document.getElementById("pronoun-tamu");
+
         if (nama) {
-          namaContainer.innerText = `${pronoun} ${nama}`;
+          pronounContainer.innerText = pronoun;
+          namaContainer.innerText = nama;
         } else {
-          namaContainer.innerText = pronoun;
+          pronounContainer.innerText = pronoun;
+          namaContainer.style.display = "none";
         }
 
         // Set nilai input nama jika ada
