@@ -555,3 +555,77 @@ footer li {
   width: 100%;
   height: 100%;
 }
+
+
+
+.guestbook {
+  padding: 8rem 0;
+  background-color: #f8f9fa;
+}
+
+.guestbook h2 {
+  color: var(--yellow);
+  font-family: "Sacramento";
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+#guestbook-form input {
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+
+#guestbook-form button {
+  background-color: var(--yellow);
+  color: white;
+  border: none;
+  padding: 0.5rem 2rem;
+  border-radius: 8px;
+}
+
+#guestbook-form button:hover {
+  background-color: white;
+  color: var(--yellow);
+  border: 1px solid var(--yellow);
+}
+
+#guestbook-list .list-group-item {
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  background-color: #fff;
+  box-shadow: var(--shadow);
+}
+
+
+
+/* Ukuran default (untuk layar besar) */
+.hero h1 {
+  font-size: 4rem;
+}
+
+.hero p {
+  font-size: 1.5rem;
+}
+
+/* Ukuran untuk layar kecil (tablet & HP) */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 4rem;
+  }
+
+  .hero p {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero h1 {
+    font-size: 4rem;
+  }
+
+  .hero p {
+    font-size: 1.5rem;
+  }
+}
+
+

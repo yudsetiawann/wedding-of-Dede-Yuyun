@@ -35,7 +35,7 @@
           <span id="pronoun-tamu">Bapak/Ibu/Saudara/i</span> <br />
           <strong id="nama-tamu" style="display: none; margin-top: 4px; font-size: 25px"></strong>
         </h4>
-        <h1 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); font-size: 50px">Yuyun & D Wahab</h1>
+        <h1 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">Yuyun & D Wahab</h1>
         <p style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8)">Akan melangsungkan resepsi pernikahan dalam:</p>
         <div class="simply-countdown"></div>
         <a href="#home" class="btn btn-lg mt-4" onClick="enableScroll()">Lihat Undangan</a>
@@ -60,6 +60,7 @@
               <a class="nav-link" href="#story" id="nav-story">Story</a>
               <!-- <a class="nav-link" href="#gallery" id="nav-gallery">Gallery</a> -->
               <a class="nav-link" href="#rsvp" id="nav-rsvp">RSVP</a>
+              <a class="nav-link" href="#guestbook" id="nav-guestbook">Guestbook</a>
               <a class="nav-link" href="#gifts" id="nav-gifts">Gifts</a>
             </div>
           </div>
@@ -315,6 +316,34 @@
             <button type="submit" class="btn btn-primary" onclick="sendToWhatsApp(event)">Kirim</button>
           </div>
         </form>
+      </div>
+    </section>
+
+    <section id="guestbook" class="guestbook">
+      <div class="container">
+        <div class="row justify-content-center mb-4">
+          <div class="col-md-8 col-10 text-center">
+            <h2>Buku Tamu</h2>
+            <p>Silakan tulis doa dan ucapan untuk kami di bawah ini.</p>
+          </div>
+        </div>
+        <form id="guestbook-form" class="row justify-content-center mb-5">
+          <div class="col-md-4 mb-3">
+            <input type="text" class="form-control" id="guest-name" placeholder="Nama" required />
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="text" class="form-control" id="guest-message" placeholder="Ucapan / Doa" required />
+          </div>
+          <input type="hidden" id="guest-code" value="auto" />
+          <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-primary">Kirim</button>
+          </div>
+        </form>
+        <div class="row justify-content-center">
+          <div class="col-md-10">
+            <ul id="guestbook-list" class="list-group"></ul>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -589,6 +618,50 @@
           document.querySelector("#nama").value = nama;
         }
       });
+    </script>
+    <script>
+      const guestbookURL = "https://script.google.com/macros/s/AKfycbxxYTIiTTdd1gAEe1nqz8lAlzdy2pvU49Cy_tgp7ywXXEloa7jxu9ygbb8LZpVw7OrU/exec";
+
+      async function loadGuestbook() {
+        const response = await fetch(guestbookURL);
+        const data = await response.json();
+
+        const list = document.getElementById("guestbook-list");
+        list.innerHTML = "";
+
+        data.reverse().forEach((item) => {
+          const li = document.createElement("li");
+          li.className = "list-group-item";
+          li.innerHTML = `
+        <strong>${item.nama}</strong>
+        <small class="text-muted">(${item.waktu})</small><br/>
+        ${item.pesan}
+      `;
+          list.appendChild(li);
+        });
+      }
+
+      document.getElementById("guestbook-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const nama = document.getElementById("guest-name").value.trim();
+        const pesan = document.getElementById("guest-message").value.trim();
+        const kode = "auto"; // tidak dipakai
+
+        if (!nama || !pesan) return alert("Nama dan ucapan wajib diisi.");
+
+        const formData = new URLSearchParams({ nama, pesan, kode });
+
+        await fetch(guestbookURL, {
+          method: "POST",
+          body: formData,
+        });
+
+        this.reset();
+        loadGuestbook();
+      });
+
+      document.addEventListener("DOMContentLoaded", loadGuestbook);
     </script>
   </body>
 </html>
